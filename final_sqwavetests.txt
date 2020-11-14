@@ -1,0 +1,130 @@
+pi@ECE5725:~/rt-tests $ htop
+pi@ECE5725:~/rt-tests $ ps -alef | grep v16
+4 S root      1885  1092  0  80   0 -  2291 -      14:41 pts/0    00:00:00 sudo ./test_rt_v16 10000
+4 R root      1886  1885 99  10   - -  3391 -      14:41 pts/0    00:01:01 ./test_rt_v16 10000
+0 S pi        1923  1109  0  80   0 -  1634 pipe_w 14:42 pts/1    00:00:00 grep --color=auto v16
+pi@ECE5725:~/rt-tests $ chrt -p 1885
+pid 1885's current scheduling policy: SCHED_OTHER
+pid 1885's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ chrt -p 1886
+pid 1886's current scheduling policy: SCHED_FIFO
+pid 1886's current scheduling priority: 49
+pi@ECE5725:~/rt-tests $ echo "Now cores made busy"
+Now cores made busy
+pi@ECE5725:~/rt-tests $ ps -alef | grep v16
+4 S root      1885  1092  0  80   0 -  2291 -      14:41 pts/0    00:00:00 sudo ./test_rt_v16 10000
+4 R root      1886  1885 99  10   - -  3391 -      14:41 pts/0    00:03:12 ./test_rt_v16 10000
+pi@ECE5725:~/rt-tests $ chrt -p 1885
+pid 1885's current scheduling policy: SCHED_OTHER
+pid 1885's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ chrt -p 1886
+pid 1886's current scheduling policy: SCHED_FIFO
+pid 1886's current scheduling priority: 49
+pi@ECE5725:~/rt-tests $ ps -alef | grep blink_v7
+4 S root      2180  1092  0  80   0 -  2291 -      14:47 pts/0    00:00:00 sudo ./blink_v7 100000
+4 S root      2181  2180 13  80   0 -  3391 -      14:47 pts/0    00:00:05 ./blink_v7 100000
+0 R pi        2211  1109  0  80   0 -  1634 -      14:48 pts/1    00:00:00 grep --color=auto blink_v7
+pi@ECE5725:~/rt-tests $ chrt -p 2180
+pid 2180's current scheduling policy: SCHED_OTHER
+pid 2180's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ chrt -p 2181
+pid 2181's current scheduling policy: SCHED_OTHER
+pid 2181's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ chrt -p 1092
+pid 1092's current scheduling policy: SCHED_OTHER
+pid 1092's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ vi make_busy.sh 
+pi@ECE5725:~/rt-tests $ sh make_busy.sh 
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+pi@ECE5725:~/rt-tests $ size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+size of data = 131072, size of *data = 4
+
+pi@ECE5725:~/rt-tests $ ps -alef | grep blink_v7
+4 S root      2314  1092  0  80   0 -  2291 -      14:49 pts/0    00:00:00 sudo ./blink_v7 100000
+4 S root      2315  2314 14  80   0 -  3391 -      14:49 pts/0    00:00:03 ./blink_v7 100000
+0 S pi        2345  1109  0  80   0 -  1634 pipe_w 14:50 pts/1    00:00:00 grep --color=auto blink_v7
+pi@ECE5725:~/rt-tests $ chrt -p 1092
+pid 1092's current scheduling policy: SCHED_OTHER
+pid 1092's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ chrt -p 2315elapsed time = 4.40432
+
+pid 2315's current scheduling policy: SCHED_OTHER
+pid 2315's current scheduling priority: 0
+pi@ECE5725:~/rt-tests $ elapsed time = 4.38701
+elapsed time = 4.36421
+elapsed time = 4.44089
+elapsed time = 4.31744
+elapsed time = 4.42604
+elapsed time = 4.38712
+elapsed time = 4.34118
+elapsed time = 4.33795
+elapsed time = 4.43623
+elapsed time = 4.34597
+elapsed time = 4.37446
+elapsed time = 4.44308
+elapsed time = 4.35392
+elapsed time = 4.40227
+elapsed time = 4.47835
+elapsed time = 4.35331
+elapsed time = 4.41448
+elapsed time = 4.33185
+elapsed time = 4.38928
+elapsed time = 4.41501
+elapsed time = 4.29617
+elapsed time = 4.33928
+elapsed time = 4.49707
+elapsed time = 4.29014
+elapsed time = 4.39621
+elapsed time = 4.44268
+elapsed time = 4.35716
+elapsed time = 4.43188
+elapsed time = 4.45659
+elapsed time = 4.34795
+elapsed time = 4.33856
+elapsed time = 4.41771
+elapsed time = 4.32251
+elapsed time = 4.38171
+elapsed time = 4.36180
+elapsed time = 4.49695
+elapsed time = 4.37600
+elapsed time = 4.50792
+elapsed time = 4.44321
+
+pi@ECE5725:~/rt-tests $ ps -alef | grep blink_v7
